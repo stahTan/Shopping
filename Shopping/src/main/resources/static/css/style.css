@@ -1,0 +1,33 @@
+@charset "ISO-8859-1";
+
+
+body{
+	background-color: rgb(32, 32, 32)
+}
+
+a{
+	color: rgb(110, 230, 42);
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 75%;
+}
+
+td, th {
+	border: 2px solid #cce6ff;
+	color: #cce6ff;
+	padding: 8px;
+	text-align: center;
+}
+
+h1, form {
+	color: #cce6ff;
+	text-align: center;
+}
+
+.center {
+	margin-left:auto;
+	margin-right: auto;
+}

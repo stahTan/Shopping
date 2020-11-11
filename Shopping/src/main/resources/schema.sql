@@ -1,0 +1,9 @@
+CREATE TABLE SHOPPING(
+	id LONG PRIMARY KEY AUTO_INCREMENT,
+	itemName VARCHAR(50),
+	itemDescription VARCHAR(255),
+	price DECIMAL(6,2),
+	qty INT,
+	storeName VARCHAR(50),
+	url VARCHAR(2000)
+);

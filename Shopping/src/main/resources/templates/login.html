@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/mycss.css"
+	th:href="@{/css/mycss.css}" />
+<title>Login Page</title>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<h1 class="navbar-brand">Login Page</h1>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="col-lg-l">
+		<form role="form" class="custom-centered" method="post" th:action="@{/login}">
+			<div th:if="${param.error}" class="custom-centered">
+				<div class="error">
+					Invalid username or password
+				</div>
+			</div>
+
+			<div th:if="${param.logout}" class="custom-centered">
+				<div class="error">
+					You have been logged out
+				</div>
+			</div>
+			
+			<div class="form-group">
+					<label for="firstname">Email</label> 
+					<input type="email"
+						name="username" class="form-control" placeholder="email@email.com" /><br>
+
+					<label for="firstname">Password</label> 
+					<input type="password"
+						name="password" class="form-control" placeholder="Enter password" />
+
+				
+				<br> <input type="submit" class="btn btn-primary"
+					name="login-submit" value="Log In" />
+			</div>
+		</form>
+	</div>
+	<p class="custom-centered">
+		<a href="/" th:href="@{/}">Back to home page</a>
+	</p>
+</body>
+</html>

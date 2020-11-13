@@ -1,0 +1,18 @@
+@charset "ISO-8859-1";
+body {
+    background-color:darkseagreen;
+    background-image:url(../images/shoppingcart.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 300px 300px;
+    background-position: left bottom;
+}
+
+.error {
+	color:red;
+}
+
+.custom-centered{
+ margin:0 auto;
+ width:300px;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+	th:href="@{/css/style.css}" />
+<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+	th:href="@{/css/style.css}" />
+<title>Shopping List</title>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<h1 class="navbar-brand">Shopping List</h1>
+			</div>
+		</div>
+	</nav>
+		<table class="center"
+			th:if="${shoppingList != null AND shoppingList != ''}">
+			<tr>
+				<th>ID</th>
+				<th>Item Name</th>
+				<th>Item Description</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Store Name<a th:href="@{/orderByStoreName}"> ^</a></th>
+				<th>url</th>
+			</tr>
+			<tr th:each="s:${shoppingList}">
+				<td th:text="${s.id}"></td>
+				<td th:text="${s.itemName}"></td>
+				<td th:text="${s.itemDescription}"></td>
+				<td th:text="${s.price}"></td>
+				<td th:text="${s.qty}"></td>
+				<td th:text="${s.storeName}"></td>
+				<td><a th:href="${s.url}">Link</a></td>
+				<td><a th:href="@{/editShoppingById/}+${s.id}">Edit</a></td>
+				<td><a th:href="@{/deleteShoppingById/}+${s.id}">Delete</a></td>
+
+			</tr>
+		</table>
+		<br> <br>
+		<div class="col-sm-s">
+			<form role="form" class="custom-centered" method="post" action=""
+				th:action="@{/insertShopping}" th:object="${shopping}">
+				<input type="hidden" name="id" th:field="*{id}" />
+				<div class="form-group">
+					<label for="firstname">Item Name</label> 
+					<input type="text" class="form-control" name="itemName" th:field="*{itemName}" />
+					<label for="firstname">Item Description</label> 
+					<input type="text" class="form-control" name="itemDescription" th:field="*{itemDescription}" />
+					<label for="firstname">Price</label> 
+					<input type="number" class="form-control" step="0.01" min=0 name="price" th:field="*{price}" />
+					<label for="firstname">Quantity</label> 
+					<input type="number" class="form-control" min=0 name="quantity" th:field="*{qty}" /> 
+					<label for="firstname">Store Name</label> 
+					<select class="form-control" th:field="*{storeName}">
+						<option th:each="s:*{storeNames}" th:value="${s}" th:text="${s}" />
+					</select>
+					<label for="firstname">URL</label> <br>
+					<input type="url" class="form-control" name="url" th:field="*{url}" /><br>
+					<input type="submit" class="btn btn-primary" value="Add" /> <br>
+				</div>
+			</form>
+		</div>
+		<div class="col-lg-l">
+		<form role="form" class="custom-centered" method="get" action=""
+			th:action="@{/filterShoppingListByStoreName}" th:object="${shopping}">
+			<label for="firstname">Filter By Store Name</label><br>
+			<input type="text" class="form-control" name="storeName" th:field="*{storeName}" /><br>
+			<input type="submit" class="btn btn-primary" value="Filter!" />
+		</form>
+		</div>
+	
+</body>
+</html>

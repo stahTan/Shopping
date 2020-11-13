@@ -17,12 +17,28 @@ public class ShoppingController {
 	
 	@Autowired
 	private DatabaseAccess da;
-
+	
 	@GetMapping("/")
-	public String index(Model model) {
+	public String index() {
+		return "index";
+	}
+
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
+	
+	@GetMapping("/permission-denied")
+	public String permissionDenied() {
+		return "/error/permission-denied";
+	}
+	
+
+	@GetMapping("/secure")
+	public String secureIndex(Model model) {
 		model.addAttribute("shopping", new Shopping());
 		model.addAttribute("shoppingList", da.getShoppingList()); 
-		return "index";
+		return "/secure/index";
 	}
 	
 	@PostMapping("/insertShopping")
@@ -30,7 +46,7 @@ public class ShoppingController {
 		da.insertShopping(shopping);
 		model.addAttribute("shopping", new Shopping());
 		model.addAttribute("shoppingList", da.getShoppingList());
-		return "index";
+		return "/secure/index";
 	}	
 	
 	@GetMapping("/editShoppingById/{id}")
@@ -39,7 +55,7 @@ public class ShoppingController {
 		model.addAttribute("shopping", Shopping);
 		da.deleteShoppingById(id);
 		model.addAttribute("shoppingList", da.getShoppingList());
-		return "index";
+		return "/secure/index";
 		
 	}	
 	
@@ -48,7 +64,7 @@ public class ShoppingController {
 		da.deleteShoppingById(id);
 		model.addAttribute("shopping", new Shopping());
 		model.addAttribute("shoppingList", da.getShoppingList());
-		return "index";
+		return "/secure/index";
 	}
 	
 	@GetMapping("/filterShoppingListByStoreName")
@@ -56,7 +72,7 @@ public class ShoppingController {
 		
 		model.addAttribute("shopping", new Shopping());
 		model.addAttribute("shoppingList", da.filterShoppingListByStoreName(storeName));
-		return "index";
+		return "/secure/index";
 	}
 	
 	@GetMapping("/orderByStoreName")
@@ -66,6 +82,6 @@ public class ShoppingController {
 		
 		model.addAttribute("shoppingList", da.orderByStoreName());
 		
-		return "index";
+		return "/secure/index";
 	}
 }

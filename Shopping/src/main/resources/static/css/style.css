@@ -1,12 +1,17 @@
 @charset "ISO-8859-1";
 
 
-body{
-	background-color: rgb(32, 32, 32)
+body {
+    background-color:darkseagreen;
+    background-image:url(../images/shoppingcart.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 350px 350px;
+    background-position: left bottom;
 }
 
 a{
-	color: rgb(110, 230, 42);
+	color: mediumblue;
 }
 
 table {
@@ -16,15 +21,15 @@ table {
 }
 
 td, th {
-	border: 2px solid #cce6ff;
-	color: #cce6ff;
+	border: 2px solid darkslateblue;
+	color: darkslateblue;
 	padding: 8px;
 	text-align: center;
 }
 
-h1, form {
-	color: #cce6ff;
-	text-align: center;
+.custom-centered{
+ margin:0 auto;
+ width:300px;
 }
 
 .center {

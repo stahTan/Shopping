@@ -2,58 +2,30 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css"
 	th:href="@{/css/style.css}" />
+<title>Home Page</title>
+
 </head>
 <body>
-
 	<h1>Shopping List</h1>
-	<table class="center"
-		th:if="${shoppingList != null AND shoppingList != ''}">
-		<tr>
-			<th>ID</th>
-			<th>Item Name</th>
-			<th>Item Description</th>
-			<th>Price</th>
-			<th>Quantity</th>
-			<th>Store Name<a th:href="@{/orderByStoreName}">^</a></th>
-			<th>url</th>
-		</tr>
-		<tr th:each="s:${shoppingList}">
-			<td th:text="${s.id}"></td>
-			<td th:text="${s.itemName}"></td>
-			<td th:text="${s.itemDescription}"></td>
-			<td th:text="${s.price}"></td>
-			<td th:text="${s.qty}"></td>
-			<td th:text="${s.storeName}"></td>
-			<td><a th:href="${s.url}">Link</a></td>
-			<td><a th:href="@{/editShoppingById/}+${s.id}">Edit</a></td>
-			<td><a th:href="@{/deleteShoppingById/}+${s.id}">Delete</a></td>
-
-		</tr>
-	</table>
-	<br>
-	<br>
-	<form class="center" method="post" action=""
-		th:action="@{/insertShopping}" th:object="${shopping}">
-		<input type="hidden" name="id" th:field="*{id}" /> 
-		Item Name:<input type="text" name="itemName" th:field="*{itemName}" /><br>
-		Item Description:<input type="text" name="itemDescription" th:field="*{itemDescription}" /><br>
-		Price:<input type="number" step="0.01" min=0 name="price" th:field="*{price}" /><br> 
-		Quantity:<input type="number" min=0 name="quantity" th:field="*{qty}" /><br>
-		Store Name:<select th:field="*{storeName}">
-			<option th:each="s:*{storeNames}" th:value="${s}" th:text="${s}" />
-			</select> <br>
-		URL:<input type="url" name="url" th:field="*{url}" /><br>
-		<input type="submit" value="Add" /> <br> <br>
-	</form>
-
-	<form class="center" method="get" action=""
-		th:action="@{/filterShoppingListByStoreName}" th:object="${shopping}">
-		Filter By Store Name:<br><input type="text" name="storeName" th:field="*{storeName}" /><br>
-		<input type="submit" value="Filter!" />
-	</form>
-
+	<p>This is an unsecured page, but you can access the secured pages after authenticating. </p>
+	<p>Navigate to the secured pages by clicking
+	<a href="/secure" th:href="@{/secure}">here</a>.</p>
+	<p>Guests may log-in using user, "guest@guest.com" and password, "password"</p>
+	<div sec:authorize="isAuthenticated()">
+		User Name: <span> sec:authentication="name"</span><br>
+		Roles: <span sec:authentication="principal.authorities"></span><br><br>
+		
+		<div>
+			<form method="get" action="#" th:action="@{/logout}">
+				<input type="submit" value="Logout" />
+			</form>
+		</div>
+	</div>
 </body>
 </html>
